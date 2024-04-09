@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-dbConnection;
+dbConnection();
 
 // ROTA DE TESTE
 app.use("/", (req, res) => {
@@ -14,5 +14,5 @@ app.use("/", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`SERVER IS RUNNING ON http://localhost: ${port}`);
+  console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
 });
