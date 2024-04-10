@@ -13,7 +13,9 @@
 <img src="https://img.shields.io/badge/EditorConfig-FEFEFE.svg?style=for-the-badge&logo=EditorConfig&logoColor=black" />
 </div>
 
-## Instalando as depedências:
+## Execução do código:
+
+## Passo 1 - Instalando as depedências:
 Abra o terminal e navegue até a pasta do seu projeto. Depois, digite:
 
 ```bash
@@ -23,12 +25,10 @@ npm install express dotenv mongoose
 
 npm install nodemon
 ```
-Para iniciar a aplicação
+## Passo 2 - Para iniciar a aplicação, digite:
 ```bash
 nodemon src/app.js
 ```
-
-## Execução do código:
 
 ## Testando via Postman:
 
