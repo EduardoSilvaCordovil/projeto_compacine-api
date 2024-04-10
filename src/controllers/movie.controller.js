@@ -10,6 +10,24 @@ class MovieController {
     }
   }
 
+  async getMovies(req, res) {
+    try {
+      const movies = await MovieService.getMovies();
+      res.status(201).json(movies);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  }
+
+  async getMovie(req, res) {
+    try {
+      const movie = await MovieService.getMovie(req.params.id);
+      res.status(200).json(movie);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
   async updateMovie(req, res) {
     try {
       const movie = await MovieService.updateMovie(req.params.id, req.body);

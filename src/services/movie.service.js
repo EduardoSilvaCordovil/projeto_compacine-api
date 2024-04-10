@@ -2,7 +2,7 @@ const MovieModel = require('../models/movie');
 
 class MovieService {
   async createMovie(movie) {
-    const newMovie = new MovieModel(data);
+    const newMovie = new MovieModel(movie);
     await newMovie.save();
     return newMovie;
   }
@@ -34,7 +34,7 @@ class MovieService {
   async deleteMovie(id) {
     const movie = MovieModel.findByIdAndDelete(id);
 
-    if(!car) {
+    if(!movie) {
       throw new Error('Movie not found');
     }
 
