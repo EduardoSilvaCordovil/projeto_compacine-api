@@ -2,13 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const sessionSchema = new Schema({
-  schedule: {
-    type: Date,
-    required: true,
-  },
   capacity: {
     type: Number,
     required: true,
+  },
+  schedule: {
+    type: Date,
+    required: true,
+    unique: true,
   },
   room: {
     type: String,
@@ -16,8 +17,8 @@ const sessionSchema = new Schema({
   },
   tickets: [
     {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: 'Ticket',
     },
   ],
 });

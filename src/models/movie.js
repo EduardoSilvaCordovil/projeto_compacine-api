@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const movieSchema = new Schema({
-  id: {
+  image_url: {
     type: String,
     required: true,
   },
-  image_url: {
+  name: {
     type: String,
     required: true,
   },
@@ -19,17 +19,14 @@ const movieSchema = new Schema({
       type: String,
     },
   ],
-  gender: {
+  genre: {
     type: String,
     required: true,
   },
-  releaseYear: {
-    type: String,
-    required: true,
-  },
-  director: {
-    type: String,
-  },
+  session: {
+    type: Schema.Types.ObjectId,
+    ref: 'Session',
+  }
 });
 
 const Movie = mongoose.model('Movie', movieSchema);
