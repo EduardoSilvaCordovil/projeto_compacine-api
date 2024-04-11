@@ -3,7 +3,10 @@ const TicketController = require('../controllers/ticket.controller');
 
 const router = express.Router();
 
-router.post('/tickets', TicketController.createTicket);
+router.post(
+  '/inserir/movie/:movieId/session/:sessionId',
+  TicketController.createTicket
+);
 router.get('/tickets', TicketController.getTickets);
 router.get('/tickets:id', TicketController.getTicket);
 router.put('/tickets:id', TicketController.uptadeTicket);

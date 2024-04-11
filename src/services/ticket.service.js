@@ -1,9 +1,18 @@
-const TicketModel = require('../models/ticket');
+const MovieModel = require('../models/movie');
 
 class TicketService {
-  async createTicket(ticket) {
-    const newTicket = new TicketModel(ticket);
-    await newTicket.save();
+  async createTicket(ticket, movie_id, session_id) {
+    const movie = await MovieModel.findById(movie_id);
+    if (!movie) {
+      throw new Error('Movie not found!');
+    }
+    const session = movie.sessions.find((session) => session._id == session_id);
+    if (!session) {
+      throw new Error('Session not found!');
+    }
+    session.session.tickets.push(ticket);
+    await movie.save();
+    const newTicket = ticket;
     return newTicket;
   }
 
