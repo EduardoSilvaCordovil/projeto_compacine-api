@@ -24,9 +24,29 @@ const movieSchema = new Schema({
     required: true,
   },
   session: {
-    type: Schema.Types.ObjectId,
-    ref: 'Session',
-  }
+    capacity: {
+      type: Number,
+      required: true,
+    },
+    room: {
+      type: String,
+      required: true,
+    },
+    tickets: [
+      {
+        seat: {
+          type: Number,
+          required: true,
+          min: [1, 'O número da cadeira deve ser igual ou superior a 1.'],
+        },
+        price: {
+          type: Number,
+          required: true,
+          min: 0,
+        },
+      },
+    ],
+  },
 });
 
 const Movie = mongoose.model('Movie', movieSchema);
