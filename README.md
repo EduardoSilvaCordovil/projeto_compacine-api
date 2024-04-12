@@ -1,5 +1,5 @@
 # projeto_compacine-api
-## Arquitetura e stack
+## Stack
 
 <div align="left">
 <img src="https://img.shields.io/badge/Node.js-339933.svg?style=for-the-badge&logo=nodedotjs&logoColor=white" />
@@ -15,28 +15,83 @@
 
 ## Execução do código:
 
-## Passo 1 - Instalando as depedências:
+## Passo 1 - Instalando as depedências
 Abra o terminal e navegue até a pasta do seu projeto. Depois, digite:
 
 ```bash
 npm install
-
-npm install express dotenv mongoose
-
-npm install nodemon
 ```
-## Passo 2 - Para iniciar a aplicação, digite:
+
+## Passo 2 - Iniciando o Docker
+```bash
+docker start containercompacine
+```
+
+## Passo 3 - Iniciando a aplicação
+Para iniciar a aplicação, digite:
+
 ```bash
 nodemon src/app.js
 ```
 
-## Testando via Postman:
+## Testando via Postman/Insomnia:
+## Rota Movie
 
 | Rota | HTTP(verbo) | Descrição |
 | -------- | ----- | ----------- |
-| /        | GET   | Selecionar Todos |
-| /        | POST  |            |
-| /        | GET   |            |
-| /        | PUT   |            |
-| /        | DELETE |           |
+| /movies/ | GET | Selecionar Todos |
+| /movies/ | POST | Criar Movie |
+| /movies/:id | GET | Selecionar por Id |
+| /movies/:id | PUT | Atualizar por Id  |
+| /movies/:id | DELETE | Excluir por Id |
 
+```json
+{
+    "image_url": "url_1",
+    "name": "filme 1",
+    "plot": "descricao do filme",
+    "actors": [
+        "Fulano"
+    ],
+    "genre": "Ação",
+    "_id": "6619805d6f1167b3becf92a7",
+    "sessions": [ {
+        "room": "B",
+        "seat": "A",
+        "price": 23.50
+}]
+}
+```
+
+## Rota Session
+
+| Rota | HTTP(verbo) | Descrição |
+| -------- | ----- | ----------- |
+| /session/ | GET | Selecionar Todos |
+| /session/ | POST | Criar Session |
+| /session/:id | GET | Selecionar por Id |
+| /session/:id | PUT | Atualizar por Id  |
+| /session/:id | DELETE | Excluir por Id |
+
+```json
+{
+ "capacity": 80,
+ "schedule": "1994-11-05T08:15:30-05:00",
+ "room": "A"
+}
+```
+
+## Rota Ticket
+
+| Rota | HTTP(verbo) | Descrição |
+| -------- | ----- | ----------- |
+| /ticket/ | GET | Selecionar Todos |
+| /ticket/ | POST | Criar Ticket |
+
+```json
+{
+ "seat": "B2",
+ "amount": 20.45,
+ "session": 
+}
+```
