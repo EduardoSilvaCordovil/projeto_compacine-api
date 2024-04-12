@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const MovieModel = require('../models/movie');
 
 class TicketService {
@@ -16,16 +17,29 @@ class TicketService {
     return newTicket;
   }
 
+  //NOT WORKING
   async getTickets() {
     return TicketModel.find();
   }
 
-  async getTicket(id) {
-    const ticket = TicketModel.findById(id);
-    if (!ticket || ticket === null) {
-      throw new Error('Ticket não encontrado');
+  async getTicket(movie_id, session_id, ticket_id) {
+    const movie = await MovieModel.findById(movie_id);
+    if (!movie) {
+      throw new Error('Movie not found!');
     }
-    return ticket;
+    const session = movie.sessions.find((session) => session._id == session_id);
+    if (!session) {
+      throw new Error('Session not found!');
+    }
+    const ticket = session.session.tickets.find(
+      (ticket) => ticket._id == ticket_id
+    );
+    if (!ticket) {
+      throw new Error('Ticket not found!');
+    }
+
+    const resTicket = ticket;
+    return resTicket;
   }
 
   async updateTicket(id, ticket) {

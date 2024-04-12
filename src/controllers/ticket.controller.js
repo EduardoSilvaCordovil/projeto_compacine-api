@@ -26,7 +26,11 @@ class TicketController {
 
   async getTicket(req, res) {
     try {
-      const ticket = await TicketService.getTicket(req.params.id);
+      const ticket = await TicketService.getTicket(
+        req.params.movieId,
+        req.params.sessionId,
+        req.params.ticketId
+      );
       res.status(200).json(ticket);
     } catch (err) {
       res.status(500).json({ error: err.message });

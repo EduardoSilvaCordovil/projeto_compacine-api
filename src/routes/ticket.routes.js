@@ -8,7 +8,7 @@ router.post(
   TicketController.createTicket
 );
 router.get(
-  '/recuperar/movie/:movieId/session/:sessionId/ticket/ticketId',
+  '/recuperar/movie/:movieId/session/:sessionId/ticket/:ticketId',
   TicketController.getTicket
 );
 router.put('/:id', TicketController.uptadeTicket);
