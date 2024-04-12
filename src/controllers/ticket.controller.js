@@ -39,8 +39,13 @@ class TicketController {
 
   async uptadeTicket(req, res) {
     try {
-      const ticket = await TicketService.updateTicket(req.params.id, req.body);
-      res.status(200).json(car);
+      const ticket = await TicketService.updateTicket(
+        req.params.movieId,
+        req.params.sessionId,
+        req.params.ticketId,
+        req.body
+      );
+      res.status(200).json(ticket);
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
@@ -48,7 +53,11 @@ class TicketController {
 
   async deleteTicket(req, res) {
     try {
-      const ticket = await TicketService.deleteTicket(req.params.id);
+      const ticket = await TicketService.deleteTicket(
+        req.params.movieId,
+        req.params.sessionId,
+        req.params.ticketId
+      );
       res.status(200).json(ticket);
     } catch (err) {
       res.status(500).json({ error: err.message });

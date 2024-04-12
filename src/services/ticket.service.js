@@ -5,11 +5,11 @@ class TicketService {
   async createTicket(ticket, movie_id, session_id) {
     const movie = await MovieModel.findById(movie_id);
     if (!movie) {
-      throw new Error('Movie not found!');
+      throw new Error('Movie not found');
     }
-    const session = movie.sessions.find((session) => session._id == session_id);
+    const session = movie.sessions.id(session_id);
     if (!session) {
-      throw new Error('Session not found!');
+      throw new Error('Movie not found');
     }
     session.session.tickets.push(ticket);
     await movie.save();
@@ -17,47 +17,63 @@ class TicketService {
     return newTicket;
   }
 
-  //NOT WORKING
-  async getTickets() {
-    return TicketModel.find();
-  }
-
   async getTicket(movie_id, session_id, ticket_id) {
     const movie = await MovieModel.findById(movie_id);
     if (!movie) {
-      throw new Error('Movie not found!');
+      throw new Error('Movie not found');
     }
-    const session = movie.sessions.find((session) => session._id == session_id);
+    const session = movie.sessions.id(session_id);
     if (!session) {
-      throw new Error('Session not found!');
+      throw new Error('Movie not found');
     }
-    const ticket = session.session.tickets.find(
-      (ticket) => ticket._id == ticket_id
-    );
+    const ticket = session.session.tickets.id(ticket_id);
     if (!ticket) {
-      throw new Error('Ticket not found!');
-    }
-
-    const resTicket = ticket;
-    return resTicket;
-  }
-
-  async updateTicket(id, ticket) {
-    const updatedTicket = await TicketModel.findByIdAndpdate(id, ticket, {
-      new: true,
-    });
-    if (!updatedTicket) {
-      throw new Error('Ticket não encontrado');
-    }
-    return updatedTicket;
-  }
-
-  async deleteTicket(id) {
-    const ticket = await TicketModel.findByIdAndDelete(id);
-    if (!ticket) {
-      throw new Error('Ticket não encontrado');
+      throw new Error('ticket not found');
     }
     return ticket;
+  }
+
+  async updateTicket(movie_id, session_id, ticket_id, ticket) {
+    const updatedTicket = await MovieModel.findOneAndUpdate(
+      {
+        _id: movie_id,
+        'sessions._id': session_id,
+        'sessions.session.tickets._id': ticket_id,
+      },
+      {
+        $set: {
+          'sessions.$[outer].session.tickets.$[inner].seat': ticket.seat,
+          'sessions.$[outer].session.tickets.$[inner].price': ticket.price,
+        },
+      },
+      {
+        arrayFilters: [{ 'outer._id': session_id }, { 'inner._id': ticket_id }],
+        new: true,
+      }
+    );
+
+    if (updatedTicket) {
+      return this.getTicket(movie_id, session_id, ticket_id, ticket);
+    } else {
+      return { message: 'Ticket not found.' };
+    }
+  }
+
+  async deleteTicket(movie_id, session_id, ticket_id) {
+    const updatedTicket = await MovieModel.findOneAndUpdate(
+      {
+        _id: movie_id,
+        'sessions._id': session_id,
+        'sessions.session.tickets._id': ticket_id,
+      },
+      { $pull: { 'sessions.$.session.tickets': { _id: ticket_id } } },
+      { new: true }
+    );
+    if (updatedTicket) {
+      return { message: 'ticket removed successfully!' };
+    } else {
+      return { message: 'Ticket not found.' };
+    }
   }
 }
 
