@@ -3,10 +3,10 @@ const SessionController = require('../controllers/session.controller');
 
 const router = express.Router();
 
-router.post('/session', SessionController.createSession);
-router.get('/session', SessionController.getSession);
-router.get('/sessions:id', SessionController.getSession);
-router.put('/sessions:id', SessionController.uptadeSession);
-router.delete('/sessions:id', SessionController.deleteSession);
+router.post('/', SessionController.createSession);
+router.get('/', SessionController.getSession);
+router.get('/:id', SessionController.getSession);
+router.put('/:id', SessionController.uptadeSession);
+router.delete('/:id', SessionController.deleteSession);
 
 module.exports = router;

@@ -7,8 +7,10 @@ router.post(
   '/inserir/movie/:movieId/session/:sessionId',
   TicketController.createTicket
 );
-router.get('/tickets', TicketController.getTickets);
-router.get('/tickets:id', TicketController.getTicket);
-router.put('/tickets:id', TicketController.uptadeTicket);
-router.delete('/tickets:id', TicketController.deleteTicket);
+router.get(
+  '/recuperar/movie/:movieId/session/:sessionId/ticket/ticketId',
+  TicketController.getTicket
+);
+router.put('/:id', TicketController.uptadeTicket);
+router.delete('/:id', TicketController.deleteTicket);
 module.exports = router;

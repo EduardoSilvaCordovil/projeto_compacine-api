@@ -1,4 +1,4 @@
-const SessionModel = require('../models/session');
+const SessionModel = require('../models/movie');
 
 class SessionService {
   async createSession(session) {

@@ -14,7 +14,7 @@ class TicketController {
       res.status(500).json({ error: err.message });
     }
   }
-
+  //NOT WORKING
   async getTickets(req, res) {
     try {
       const tickets = await TicketService.getTickets();
