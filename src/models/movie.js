@@ -28,6 +28,10 @@ const movieSchema = new Schema({
       type: Number,
       required: true,
     },
+    time: {
+      type: String,
+      required: true,
+    },
     room: {
       type: String,
       required: true,

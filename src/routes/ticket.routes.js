@@ -9,11 +9,11 @@ router.get(
   TicketController.getTicket
 );
 router.put(
-  '/update/movie/:movieId/session/:sessionId/ticket/:ticketId',
+  '/update/movie/:movieId/ticket/:ticketId',
   TicketController.uptadeTicket
 );
 router.delete(
-  '/delete/movie/:movieId/session/:sessionId/ticket/:ticketId',
+  '/delete/movie/:movieId/ticket/:ticketId',
   TicketController.deleteTicket
 );
 module.exports = router;
