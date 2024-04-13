@@ -7,9 +7,15 @@ class TicketService {
     if (!movie) {
       throw new Error('Movie not found');
     }
-    const tickets = movie.session.tickets;
-    if (!tickets) {
-      throw new Error('ticket not found');
+    const existingTicket = await MovieModel.findOne(
+      {
+        _id: movie,
+        'session.tickets': { $elemMatch: { seat: ticket.seat } },
+      },
+      { 'session.tickets.$': 1 }
+    );
+    if (existingTicket != null) {
+      throw new Error('Seat already taken!');
     }
     tickets.push(ticket);
     await movie.save();

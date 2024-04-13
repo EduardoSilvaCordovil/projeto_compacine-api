@@ -8,13 +8,18 @@ class MovieService {
   }
 
   async getMovies() {
-    return MovieModel.find();
+    const movies = await MovieModel.find();
+    if (!movies) {
+      throw new Error('Movie not found');
+    }
+
+    return { Search: movies, totalResults: movies.length };
   }
 
   async getMovie(id) {
     const movie = MovieModel.findById(id);
 
-    if(!movie) {
+    if (!movie) {
       throw new Error('Movie not found');
     }
 
@@ -22,9 +27,11 @@ class MovieService {
   }
 
   async updateMovie(id, movie) {
-    const updatedMovie = await MovieModel.findByIdAndUpdate(id, movie, { new:true });
+    const updatedMovie = await MovieModel.findByIdAndUpdate(id, movie, {
+      new: true,
+    });
 
-    if(!updatedMovie) {
+    if (!updatedMovie) {
       throw new Error('Movie not found');
     }
 
@@ -34,7 +41,7 @@ class MovieService {
   async deleteMovie(id) {
     const movie = MovieModel.findByIdAndDelete(id);
 
-    if(!movie) {
+    if (!movie) {
       throw new Error('Movie not found');
     }
 
