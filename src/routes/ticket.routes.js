@@ -3,12 +3,9 @@ const TicketController = require('../controllers/ticket.controller');
 
 const router = express.Router();
 
-router.post(
-  '/inserir/movie/:movieId/session/:sessionId',
-  TicketController.createTicket
-);
+router.post('/inserir/movie/:movieId/', TicketController.createTicket);
 router.get(
-  '/recuperar/movie/:movieId/session/:sessionId/ticket/:ticketId',
+  '/recuperar/movie/:movieId/ticket/:ticketId',
   TicketController.getTicket
 );
 router.put(

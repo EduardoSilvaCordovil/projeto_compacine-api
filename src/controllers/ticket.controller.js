@@ -3,11 +3,7 @@ const TicketService = require('../services/ticket.service');
 class TicketController {
   async createTicket(req, res) {
     try {
-      await TicketService.createTicket(
-        req.body,
-        req.params.movieId,
-        req.params.sessionId
-      );
+      await TicketService.createTicket(req.body, req.params.movieId);
       const ticket = req.body;
       res.status(201).json(ticket);
     } catch (err) {
@@ -28,7 +24,6 @@ class TicketController {
     try {
       const ticket = await TicketService.getTicket(
         req.params.movieId,
-        req.params.sessionId,
         req.params.ticketId
       );
       res.status(200).json(ticket);
@@ -41,7 +36,6 @@ class TicketController {
     try {
       const ticket = await TicketService.updateTicket(
         req.params.movieId,
-        req.params.sessionId,
         req.params.ticketId,
         req.body
       );
@@ -55,7 +49,6 @@ class TicketController {
     try {
       const ticket = await TicketService.deleteTicket(
         req.params.movieId,
-        req.params.sessionId,
         req.params.ticketId
       );
       res.status(200).json(ticket);

@@ -2,34 +2,32 @@ const mongoose = require('mongoose');
 const MovieModel = require('../models/movie');
 
 class TicketService {
-  async createTicket(ticket, movie_id, session_id) {
+  async createTicket(ticket, movie_id) {
     const movie = await MovieModel.findById(movie_id);
     if (!movie) {
       throw new Error('Movie not found');
     }
-    const session = movie.sessions.id(session_id);
-    if (!session) {
-      throw new Error('Movie not found');
+    const tickets = movie.session.tickets;
+    if (!tickets) {
+      throw new Error('ticket not found');
     }
-    session.session.tickets.push(ticket);
+    tickets.push(ticket);
     await movie.save();
     const newTicket = ticket;
     return newTicket;
   }
 
-  async getTicket(movie_id, session_id, ticket_id) {
+  async getTicket(movie_id, ticket_id) {
     const movie = await MovieModel.findById(movie_id);
     if (!movie) {
       throw new Error('Movie not found');
     }
-    const session = movie.sessions.id(session_id);
-    if (!session) {
-      throw new Error('Movie not found');
+    const tickets = movie.session.tickets;
+    if (tickets == null) {
+      throw new Error('Ticket not found');
     }
-    const ticket = session.session.tickets.id(ticket_id);
-    if (!ticket) {
-      throw new Error('ticket not found');
-    }
+    const ticket = tickets.id(ticket_id);
+
     return ticket;
   }
 

@@ -23,34 +23,30 @@ const movieSchema = new Schema({
     type: String,
     required: true,
   },
-  sessions: [
-    {
-      session: {
-        capacity: {
+  session: {
+    capacity: {
+      type: Number,
+      required: true,
+    },
+    room: {
+      type: String,
+      required: true,
+    },
+    tickets: [
+      {
+        seat: {
           type: Number,
           required: true,
+          min: [1, 'O número da cadeira deve ser igual ou superior a 1.'],
         },
-        room: {
-          type: String,
+        price: {
+          type: Number,
           required: true,
+          min: 0,
         },
-        tickets: [
-          {
-            seat: {
-              type: Number,
-              required: true,
-              min: [1, 'O número da cadeira deve ser igual ou superior a 1.'],
-            },
-            price: {
-              type: Number,
-              required: true,
-              min: 0,
-            },
-          },
-        ],
       },
-    },
-  ],
+    ],
+  },
 });
 
 const Movie = mongoose.model('Movie', movieSchema);
