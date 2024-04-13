@@ -17,6 +17,7 @@ class TicketService {
     if (existingTicket != null) {
       throw new Error('Seat already taken!');
     }
+    const tickets = movie.session.tickets;
     tickets.push(ticket);
     await movie.save();
     const newTicket = ticket;

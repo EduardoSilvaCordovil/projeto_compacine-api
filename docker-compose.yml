@@ -1,7 +1,25 @@
 version: '3.8'
 services:
-  db:
-    image: mongo
+  api:
+    container_name: api
+    build: .
     restart: always
+    env_file:
+      - .env
+    depends_on:
+      - db
     ports:
-      - '27017:27017'
+      - 3000:3000
+    command: npm run start
+
+  db:
+    image: mongo:latest
+    container_name: db
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '2717:27017'
+    volumes:
+        #Don't forget to map your volume!!
+      - your-volume-here:/data/db
