@@ -17,7 +17,7 @@ class MovieService {
   }
 
   async getMovie(id) {
-    const movie = MovieModel.findById(id);
+    const movie = await MovieModel.findById(id);
 
     if (!movie) {
       throw new Error('Movie not found');
@@ -39,11 +39,12 @@ class MovieService {
   }
 
   async deleteMovie(id) {
-    const movie = MovieModel.findByIdAndDelete(id);
+    const movie = await MovieModel.findByIdAndDelete({ _id: id });
 
-    if (!movie) {
+    if (movie == null) {
       throw new Error('Movie not found');
     }
+    console.log(movie);
 
     return movie;
   }

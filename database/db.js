@@ -7,7 +7,7 @@ const dbConnection = async () => {
     console.log('CONECTED WITH SERVER');
   } catch (err) {
     console.log('FAIL TO CONNECT WITH SERVER', err);
-    
+
     process.exit(1);
   }
 };
