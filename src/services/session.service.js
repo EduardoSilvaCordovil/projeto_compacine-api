@@ -1,40 +1,47 @@
-const SessionModel = require('../models/movie');
+const mongoose = require('mongoose');
+const MovieModel = require('../models/movie');
 
 class SessionService {
-  async createSession(session) {
-    const newSession = new SessionModel(session);
-    await newSession.save();
-    return newSession;
+  async createSession(movie_id, sessionData) {
+    const movie = await MovieModel.findById(movie_id);
+    if (!movie) {
+      throw new Error('Movie not found');
+    }
+    movie.session = sessionData;
+    await movie.save();
+    return movie.session;
   }
 
   async getSessions() {
-    return SessionModel.find();
+    return MovieModel.find();
   }
 
-  async getSession(id) {
-    const session = SessionModel.findById(id);
-    if (!session || session === null) {
+  async getSession(movie_id) {
+    const movie = await MovieModel.findById(movie_id);
+    if (!movie || session === null) {
       throw new Error('Session not found');
     }
-    return session;
+    return movie.session;
   }
 
-  async updateSession(id, ticket) {
-    const updatedSession = await SessionModel.findByIdAndpdate(id, session, {
-      new: true,
-    });
-    if (!updatedTicket) {
-      throw new Error('Session not found');
+  async updateSession(movie_id, sessionData) {
+    const movie = await MovieModel.findByIdAndupdate(movie_id);
+    if (!movie || !movie.session) {
+      throw new Error('Movie not found');
     }
-    return updatedSession;
+    movie.session = sessionData;
+    await movie.save();
+    return movie.session;
   }
 
-  async deleteSession(id) {
-    const session = await SessionModel.findByIdAndDelete(id);
-    if (!session) {
+  async deleteSession(movie_id) {
+    const movie = await SessionModel.findByIdAndDelete(movie_id);
+    if (!movie || !movie.session) {
       throw new Error('Session not found');
     }
-    return session;
+    movie.session = undefined;
+    await movie.save();
+    return 'Session deleted';
   }
 }
 
