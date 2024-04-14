@@ -39,45 +39,37 @@ nodemon src/app.js
 
 | Rota | HTTP(verbo) | Descrição |
 | -------- | ----- | ----------- |
-| /movies/ | GET | Selecionar Todos |
-| /movies/ | POST | Criar Movie |
-| /movies/:id | GET | Selecionar por Id |
-| /movies/:id | PUT | Atualizar por Id  |
-| /movies/:id | DELETE | Excluir por Id |
+| http://localhost:3000/movies/ | GET | Selecionar Todos |
+| http://localhost:3000/movies/ | POST | Criar Movie |
+| http://localhost:3000/movies/id | GET | Selecionar por Id |
+| http://localhost:3000/movies/id | PUT | Atualizar por Id  |
+| http://localhost:3000/movies/id | DELETE | Excluir por Id |
 
 ```json
 {
-    "image_url": "url_1",
-    "name": "filme 1",
-    "plot": "descricao do filme",
-    "actors": [
-        "Fulano"
-    ],
-    "genre": "Ação",
-    "_id": "6619805d6f1167b3becf92a7",
-    "sessions": [ {
-        "room": "B",
-        "seat": "A",
-        "price": 23.50
-}]
-}
-```
-
-## Rota Session
-
-| Rota | HTTP(verbo) | Descrição |
-| -------- | ----- | ----------- |
-| /session/ | GET | Selecionar Todos |
-| /session/ | POST | Criar Session |
-| /session/:id | GET | Selecionar por Id |
-| /session/:id | PUT | Atualizar por Id  |
-| /session/:id | DELETE | Excluir por Id |
-
-```json
-{
- "capacity": 80,
- "schedule": "1994-11-05T08:15:30-05:00",
- "room": "A"
+  "image_url": "https://www.example.com/movie.jpg",
+  "name": "The Movie Title",
+  "plot": "A brief description of the movie plot.",
+  "actors": [
+    "Actor 1",
+    "Actor 2"
+  ],
+  "genre": "Action",
+  "session": {
+    "capacity": 100,
+    "time": "20:00",
+    "room": "Theater 1",
+    "tickets": [
+      {
+        "seat": 1,
+        "price": 15.00
+      },
+      {
+        "seat": 5,
+        "price": 12.50
+      }
+    ]
+  }
 }
 ```
 
@@ -85,9 +77,11 @@ nodemon src/app.js
 
 | Rota | HTTP(verbo) | Descrição |
 | -------- | ----- | ----------- |
-| /ticket/ | GET | Selecionar Todos |
-| /ticket/ | POST | Criar Ticket |
-
+| http://localhost:3000/ticket/ | GET | Selecionar Todos |
+| http://localhost:3000/ticket/ | POST | Criar Movie |
+| http://localhost:3000/ticket/id | GET | Selecionar por Id |
+| http://localhost:3000/ticket/id | PUT | Atualizar por Id  |
+| http://localhost:3000/ticket/id | DELETE | Excluir por Id |
 ```json
 {
  "seat": "B2",
