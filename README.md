@@ -84,7 +84,7 @@ docker-compose up -d
 | Rota                                                                    | HTTP(verbo) | Descrição                |
 | ----------------------------------------------------------------------- | ----------- | ------------------------ |
 | http://localhost:3000/tickets/recuperar/movie/:movieId/ticket/:ticketId | GET         | Selecionar Ticket por id |
-| http://localhost:3000/tickets/inserir/movie/:movieId/                   | POST        | Criar Movie              |
+| http://localhost:3000/tickets/inserir/movie/:movieId/                   | POST        | Criar Ticket              |
 
 ```json
 {
