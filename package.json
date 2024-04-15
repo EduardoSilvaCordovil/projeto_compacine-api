@@ -4,13 +4,14 @@
   "description": "api de bilheteria de cinema",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "start": "nodemon src/app.js"
   },
   "author": "Emmanuel, Ian, Juan e Eduardo",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "mongoose": "^8.3.0"
+    "mongoose": "^8.3.0",
+    "nodemon": "^3.1.0"
   }
 }
