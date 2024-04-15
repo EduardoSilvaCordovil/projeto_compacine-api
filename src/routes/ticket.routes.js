@@ -8,12 +8,5 @@ router.get(
   '/recuperar/movie/:movieId/ticket/:ticketId',
   TicketController.getTicket
 );
-router.put(
-  '/update/movie/:movieId/ticket/:ticketId',
-  TicketController.uptadeTicket
-);
-router.delete(
-  '/delete/movie/:movieId/ticket/:ticketId',
-  TicketController.deleteTicket
-);
+
 module.exports = router;

@@ -1,4 +1,5 @@
 # projeto_compacine-api
+
 ## Stack
 
 <div align="left">
@@ -15,77 +16,75 @@
 
 ## Execução do código:
 
-## Passo 1 - Instalando as depedências
-Abra o terminal e navegue até a pasta do seu projeto. Depois, digite:
+## Passo 1 - Criando um arquivo .env
+
+Na pasta do projeto crie um arquivo .env com a seguinte variável:
 
 ```bash
-npm install
+MONGODB_URI = mongodb://db:27017
 ```
 
-## Passo 2 - Iniciando o Docker
+## Passo 2 - Mapeando o seu volume do mongodb
+
+No arquivo "docker-compose.yml" no service "db" na parte "volumes"
+antes dos ":" coloque o caminho em que deseja salvar os arquivos do banco na sua máquina local
+
+## Passo 3 - Contruindo os containers api e db
+
+No terminal, certifique-se de estar na pasta do projeto e digite:
+
 ```bash
-docker start containercompacine
+docker-compose build
 ```
 
-## Passo 3 - Iniciando a aplicação
-Para iniciar a aplicação, digite:
+## Passo 4 - Iniciando a aplicação
+
+No terminal, certifique-se de estar na pasta do projeto, digite:
 
 ```bash
-nodemon src/app.js
+docker-compose up -d
 ```
 
 ## Testando via Postman/Insomnia:
+
 ## Rota Movie
 
-| Rota | HTTP(verbo) | Descrição |
-| -------- | ----- | ----------- |
-| http://localhost:3000/movies/ | GET | Selecionar Todos |
-| http://localhost:3000/movies/ | POST | Criar Movie |
-| http://localhost:3000/movies/id | GET | Selecionar por Id |
-| http://localhost:3000/movies/id | PUT | Atualizar por Id  |
-| http://localhost:3000/movies/id | DELETE | Excluir por Id |
+| Rota                             | HTTP(verbo) | Descrição         |
+| -------------------------------- | ----------- | ----------------- |
+| http://localhost:3000/movies/    | GET         | Selecionar Todos  |
+| http://localhost:3000/movies/    | POST        | Criar Movie       |
+| http://localhost:3000/movies/:id | GET         | Selecionar por Id |
+| http://localhost:3000/movies/:id | PUT         | Atualizar por Id  |
+| http://localhost:3000/movies/:id | DELETE      | Excluir por Id    |
+
+## Note que, na criação do movie, o array de tickets deve ser iniciado vazio
 
 ```json
 {
   "image_url": "https://www.example.com/movie.jpg",
   "name": "The Movie Title",
   "plot": "A brief description of the movie plot.",
-  "actors": [
-    "Actor 1",
-    "Actor 2"
-  ],
+  "actors": ["Actor 1", "Actor 2"],
   "genre": "Action",
   "session": {
     "capacity": 100,
     "time": "20:00",
     "room": "Theater 1",
-    "tickets": [
-      {
-        "seat": 1,
-        "price": 15.00
-      },
-      {
-        "seat": 5,
-        "price": 12.50
-      }
-    ]
+    "tickets": []
   }
 }
 ```
 
 ## Rota Ticket
 
-| Rota | HTTP(verbo) | Descrição |
-| -------- | ----- | ----------- |
-| http://localhost:3000/ticket/ | GET | Selecionar Todos |
-| http://localhost:3000/ticket/ | POST | Criar Movie |
-| http://localhost:3000/ticket/id | GET | Selecionar por Id |
-| http://localhost:3000/ticket/id | PUT | Atualizar por Id  |
-| http://localhost:3000/ticket/id | DELETE | Excluir por Id |
+| Rota                                                                    | HTTP(verbo) | Descrição                |
+| ----------------------------------------------------------------------- | ----------- | ------------------------ |
+| http://localhost:3000/tickets/recuperar/movie/:movieId/ticket/:ticketId | GET         | Selecionar Ticket por id |
+| http://localhost:3000/tickets/inserir/movie/:movieId/                   | POST        | Criar Movie              |
+
 ```json
 {
- "seat": "B2",
- "amount": 20.45,
- "session": 
+  "seat": "B2",
+  "amount": 20.45
 }
 ```
