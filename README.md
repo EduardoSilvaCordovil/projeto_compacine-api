@@ -18,7 +18,7 @@
 
 ## Passo 1 - Criando um arquivo .env
 
-Na pasta do projeto crie um arquivo .env com a seguinte variável:
+Na pasta do projeto crie um arquivo .env com as seguintes variáveis:
 
 ```bash
 PORT = 3000
@@ -89,6 +89,6 @@ docker-compose up -d
 ```json
 {
   "seat": "B2",
-  "amount": 20.45
+  "price": 20.45
 }
 ```

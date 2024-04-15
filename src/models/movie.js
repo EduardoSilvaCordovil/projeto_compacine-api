@@ -39,9 +39,8 @@ const movieSchema = new Schema({
     tickets: [
       {
         seat: {
-          type: Number,
+          type: String,
           required: true,
-          min: [1, 'O número da cadeira deve ser igual ou superior a 1.'],
         },
         price: {
           type: Number,
