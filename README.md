@@ -33,7 +33,7 @@ MONGODB_URI = mongodb://db:27017
 No arquivo "docker-compose.yml" no service "db" na parte "volumes"
 antes dos ":" coloque o caminho em que deseja salvar os arquivos do banco na sua máquina local
 
-## Passo 3 - Contruindo os containers api e db
+## Passo 3 - Construindo os containers api e db
 
 No terminal, certifique-se de estar na pasta do projeto e digite:
 
