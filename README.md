@@ -21,6 +21,10 @@
 Na pasta do projeto crie um arquivo .env com a seguinte variável:
 
 ```bash
+PORT = 3000
+```
+
+```bash
 MONGODB_URI = mongodb://db:27017
 ```
 

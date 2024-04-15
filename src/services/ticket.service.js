@@ -7,6 +7,7 @@ class TicketService {
     if (!movie) {
       throw new Error('Movie not found');
     }
+
     const existingTicket = await MovieModel.findOne(
       {
         _id: movie,
@@ -19,6 +20,9 @@ class TicketService {
     }
     const tickets = movie.session.tickets;
     tickets.push(ticket);
+    if (movie.session.tickets.length > movie.session.capacity) {
+      throw new Error('Session is full!');
+    }
     await movie.save();
     const newTicket = ticket;
     return newTicket;
