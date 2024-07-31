@@ -21,9 +21,8 @@ services:
     ports:
       - '27017:27017'
     volumes:
-        #Don't forget to map your volume!!
+      #Don't forget to map your volume!!
       - db:/data/db
 
 volumes:
-  db:      
-  
+  db:
